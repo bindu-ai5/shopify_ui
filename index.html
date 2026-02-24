@@ -9,12 +9,42 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f6f6f7;
+        }
+        .nav-bar {
+            background: white;
+            border-bottom: 1px solid #e1e3e5;
+            padding: 0 24px;
+            display: flex;
+            gap: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-item {
+            padding: 16px 8px;
+            color: #637381;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .nav-item:hover {
+            color: #202223;
+        }
+        .nav-item.active {
+            color: #008060;
+            border-bottom-color: #008060;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
         }
         .header {
             background: white;
@@ -119,34 +149,513 @@
             background: #d4f5e9;
             color: #008060;
         }
+        .settings-card {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .settings-group {
+            margin-bottom: 24px;
+        }
+        .settings-group h3 {
+            color: #202223;
+            font-size: 16px;
+            margin: 0 0 12px 0;
+        }
+        .settings-group label {
+            display: block;
+            color: #637381;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .settings-group select,
+        .settings-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #c4cdd5;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .radio-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border: 2px solid #c4cdd5;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        .radio-option:hover {
+            border-color: #008060;
+        }
+        .radio-option.selected {
+            border-color: #008060;
+            background: #f4f6f8;
+        }
+        .radio-option input[type="radio"] {
+            width: auto;
+        }
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .analytics-card {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid #008060;
+        }
+        .analytics-card.warning {
+            border-left-color: #ffc453;
+        }
+        .analytics-card.info {
+            border-left-color: #47c1bf;
+        }
+        .analytics-label {
+            color: #637381;
+            font-size: 13px;
+            margin: 0 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .analytics-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #202223;
+            margin: 0 0 8px 0;
+        }
+        .analytics-subtext {
+            color: #637381;
+            font-size: 13px;
+        }
+        .analytics-change {
+            display: inline-block;
+            color: #008060;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .analytics-change.negative {
+            color: #d82c0d;
+        }
+        .chart-container {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #202223;
+        }
+        .chart-period {
+            display: flex;
+            gap: 8px;
+        }
+        .period-btn {
+            padding: 6px 12px;
+            border: 1px solid #c4cdd5;
+            background: white;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #637381;
+        }
+        .period-btn.active {
+            background: #008060;
+            color: white;
+            border-color: #008060;
+        }
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            height: 200px;
+            padding: 20px 0;
+        }
+        .bar {
+            flex: 1;
+            background: linear-gradient(to top, #008060, #47c1bf);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            min-height: 20px;
+            transition: all 0.3s;
+        }
+        .bar:hover {
+            opacity: 0.8;
+        }
+        .bar-label {
+            text-align: center;
+            font-size: 12px;
+            color: #637381;
+            margin-top: 8px;
+        }
+        .schedule-preview {
+            background: #f4f6f8;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+        .schedule-preview h4 {
+            margin: 0 0 8px 0;
+            color: #202223;
+            font-size: 14px;
+        }
+        .schedule-preview ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #637381;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="nav-item active" onclick="showPage('dashboard')">Dashboard</div>
+        <div class="nav-item" onclick="showPage('analytics')">Analytics</div>
+        <div class="nav-item" onclick="showPage('settings')">Settings</div>
+        <div class="nav-item" onclick="showPage('agents')">Agents</div>
+    </div>
     <div class="container">
-        <div class="header">
-            <h1>🤖 Catalog Agents</h1>
-            <p>Enhance your product catalog with AI-powered agents</p>
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page active">
+            <div class="header">
+                <h1>🤖 Catalog Agents Dashboard</h1>
+                <p>Quick overview of your catalog enrichment</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Your Catalog</h3>
+                    <div class="number">224</div>
+                    <p style="color: #637381; font-size: 14px;">products</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Agents</h3>
+                    <div class="number">0 / 3</div>
+                    <p style="color: #637381; font-size: 14px;">Starter Plan</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Estimated Cost</h3>
+                    <div class="number">$0.00</div>
+                    <p style="color: #637381; font-size: 14px;">per month</p>
+                </div>
+            </div>
+
+            <div style="background: white; padding: 24px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <h3>Quick Actions</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px;">
+                    <button class="button" onclick="showPage('agents')">Activate Agents</button>
+                    <button class="button button-secondary" onclick="showPage('analytics')">View Analytics</button>
+                    <button class="button button-secondary" onclick="showPage('settings')">Configure Settings</button>
+                </div>
+            </div>
         </div>
 
-        <div class="stats">
-            <div class="stat-card">
-                <h3>Your Catalog</h3>
-                <div class="number">224</div>
-                <p style="color: #637381; font-size: 14px;">products</p>
+        <!-- Analytics Page -->
+        <div id="analytics" class="page">
+            <div class="header">
+                <h1>📊 Analytics Dashboard</h1>
+                <p>Track your catalog enrichment performance</p>
             </div>
-            <div class="stat-card">
-                <h3>Active Agents</h3>
-                <div class="number">0 / 3</div>
-                <p style="color: #637381; font-size: 14px;">Starter Plan</p>
+
+            <!-- Key Metrics -->
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <p class="analytics-label">Products Enriched</p>
+                    <div class="analytics-value">142</div>
+                    <p class="analytics-subtext">
+                        This month
+                        <span class="analytics-change">↑ 23%</span>
+                    </p>
+                </div>
+
+                <div class="analytics-card info">
+                    <p class="analytics-label">New Products</p>
+                    <div class="analytics-value">18</div>
+                    <p class="analytics-subtext">
+                        Auto-enriched
+                        <span class="analytics-change">↑ 12%</span>
+                    </p>
+                </div>
+
+                <div class="analytics-card warning">
+                    <p class="analytics-label">Updated Products</p>
+                    <div class="analytics-value">124</div>
+                    <p class="analytics-subtext">
+                        Re-processed
+                        <span class="analytics-change">↑ 31%</span>
+                    </p>
+                </div>
+
+                <div class="analytics-card">
+                    <p class="analytics-label">Active Agents</p>
+                    <div class="analytics-value">3</div>
+                    <p class="analytics-subtext">
+                        Out of 10 available
+                    </p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3>Estimated Cost</h3>
-                <div class="number">$0.00</div>
-                <p style="color: #637381; font-size: 14px;">per month</p>
+
+            <!-- Enrichment Trend Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Product Enrichment Trend</div>
+                    <div class="chart-period">
+                        <button class="period-btn" onclick="setChartPeriod('7d', this)">7D</button>
+                        <button class="period-btn active" onclick="setChartPeriod('30d', this)">30D</button>
+                        <button class="period-btn" onclick="setChartPeriod('90d', this)">90D</button>
+                    </div>
+                </div>
+                <div class="bar-chart">
+                    <div style="flex: 1;">
+                        <div class="bar" style="height: 45%;"></div>
+                        <div class="bar-label">Week 1</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="bar" style="height: 65%;"></div>
+                        <div class="bar-label">Week 2</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="bar" style="height: 80%;"></div>
+                        <div class="bar-label">Week 3</div>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="bar" style="height: 100%;"></div>
+                        <div class="bar-label">Week 4</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Usage Breakdown -->
+            <div class="chart-container">
+                <div class="chart-title" style="margin-bottom: 20px;">Agent Usage This Month</div>
+                <div style="display: grid; gap: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f4f6f8; border-radius: 6px;">
+                        <div>
+                            <span style="font-weight: 600; color: #202223;">🏷️ Taxonomy Agent</span>
+                            <span style="color: #637381; font-size: 13px; margin-left: 8px;">142 products</span>
+                        </div>
+                        <div style="font-weight: 600; color: #008060;">$2.84</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f4f6f8; border-radius: 6px;">
+                        <div>
+                            <span style="font-weight: 600; color: #202223;">🔍 SEO Agent</span>
+                            <span style="color: #637381; font-size: 13px; margin-left: 8px;">142 products</span>
+                        </div>
+                        <div style="font-weight: 600; color: #008060;">$2.84</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f4f6f8; border-radius: 6px;">
+                        <div>
+                            <span style="font-weight: 600; color: #202223;">📋 Extraction Agent</span>
+                            <span style="color: #637381; font-size: 13px; margin-left: 8px;">89 products</span>
+                        </div>
+                        <div style="font-weight: 600; color: #008060;">$2.67</div>
+                    </div>
+                </div>
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e1e3e5; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; color: #202223;">Total Usage This Month</span>
+                    <span style="font-size: 20px; font-weight: 700; color: #008060;">$8.35</span>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="chart-container">
+                <div class="chart-title" style="margin-bottom: 20px;">Recent Activity</div>
+                <div style="display: grid; gap: 8px;">
+                    <div style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #e1e3e5;">
+                        <div style="color: #637381; font-size: 13px; min-width: 80px;">2 min ago</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 500; color: #202223;">18 new products enriched</div>
+                            <div style="font-size: 13px; color: #637381;">Taxonomy, SEO, and Extraction agents completed</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #e1e3e5;">
+                        <div style="color: #637381; font-size: 13px; min-width: 80px;">1 hour ago</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 500; color: #202223;">Scheduled enrichment completed</div>
+                            <div style="font-size: 13px; color: #637381;">124 products updated successfully</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; padding: 12px;">
+                        <div style="color: #637381; font-size: 13px; min-width: 80px;">3 hours ago</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 500; color: #202223;">SEO Agent activated</div>
+                            <div style="font-size: 13px; color: #637381;">Agent is now processing your catalog</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h2>Available Agents</h2>
+        <!-- Settings Page -->
+        <div id="settings" class="page">
+            <div class="header">
+                <h1>⚙️ Settings</h1>
+                <p>Configure how and when your catalog agents run</p>
+            </div>
+
+            <!-- Run Mode Settings -->
+            <div class="settings-card">
+                <h2 style="margin: 0 0 20px 0; color: #202223;">Catalog Agent Execution</h2>
+                
+                <div class="settings-group">
+                    <h3>Run Mode</h3>
+                    <p style="color: #637381; font-size: 14px; margin-bottom: 12px;">
+                        Choose how you want to run your catalog agents
+                    </p>
+                    
+                    <div class="radio-group">
+                        <label class="radio-option selected" onclick="selectRunMode('manual')">
+                            <input type="radio" name="runMode" value="manual" checked>
+                            <div>
+                                <div style="font-weight: 600; color: #202223;">Manual (Run Now)</div>
+                                <div style="font-size: 13px; color: #637381;">Trigger enrichment manually</div>
+                            </div>
+                        </label>
+                        
+                        <label class="radio-option" onclick="selectRunMode('scheduled')">
+                            <input type="radio" name="runMode" value="scheduled">
+                            <div>
+                                <div style="font-weight: 600; color: #202223;">Scheduled</div>
+                                <div style="font-size: 13px; color: #637381;">Automatic at set intervals</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Manual Mode Options -->
+                <div id="manualOptions" class="settings-group">
+                    <h3>Manual Trigger</h3>
+                    <button class="button" style="width: auto;" onclick="runNow()">
+                        ▶️ Run All Active Agents Now
+                    </button>
+                    <p style="color: #637381; font-size: 13px; margin-top: 8px;">
+                        This will process all products in your catalog with active agents
+                    </p>
+                </div>
+
+                <!-- Scheduled Mode Options -->
+                <div id="scheduledOptions" class="settings-group" style="display: none;">
+                    <h3>Schedule Configuration</h3>
+                    
+                    <label>Frequency</label>
+                    <select id="scheduleFrequency" onchange="updateSchedulePreview()">
+                        <option value="hourly">Every Hour</option>
+                        <option value="daily" selected>Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+
+                    <div style="margin-top: 16px;">
+                        <label>Time of Day</label>
+                        <input type="time" id="scheduleTime" value="02:00" onchange="updateSchedulePreview()">
+                    </div>
+
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" id="autoEnrichNew" checked style="width: auto; margin-right: 8px;">
+                            Automatically enrich new products
+                        </label>
+                    </div>
+
+                    <div style="margin-top: 16px;">
+                        <label>
+                            <input type="checkbox" id="autoUpdateChanged" style="width: auto; margin-right: 8px;">
+                            Re-enrich products when they change
+                        </label>
+                    </div>
+
+                    <div class="schedule-preview">
+                        <h4>📅 Schedule Preview</h4>
+                        <ul id="schedulePreviewList">
+                            <li>Runs daily at 2:00 AM</li>
+                            <li>Automatically processes new products</li>
+                            <li>Next run: Tomorrow at 2:00 AM</li>
+                        </ul>
+                    </div>
+
+                    <button class="button" style="width: auto; margin-top: 16px;" onclick="saveSchedule()">
+                        💾 Save Schedule
+                    </button>
+                </div>
+            </div>
+
+            <!-- Processing Settings -->
+            <div class="settings-card">
+                <h2 style="margin: 0 0 20px 0; color: #202223;">Processing Options</h2>
+                
+                <div class="settings-group">
+                    <label>Products per Batch</label>
+                    <select>
+                        <option value="10">10 products</option>
+                        <option value="50" selected>50 products</option>
+                        <option value="100">100 products</option>
+                        <option value="all">All products</option>
+                    </select>
+                    <p style="color: #637381; font-size: 13px; margin-top: 8px;">
+                        Larger batches process faster but use more resources
+                    </p>
+                </div>
+
+                <div class="settings-group">
+                    <label>
+                        <input type="checkbox" checked style="width: auto; margin-right: 8px;">
+                        Skip products already enriched today
+                    </label>
+                </div>
+
+                <div class="settings-group">
+                    <label>
+                        <input type="checkbox" style="width: auto; margin-right: 8px;">
+                        Send email notification when enrichment completes
+                    </label>
+                </div>
+            </div>
+
+            <!-- Webhook Settings -->
+            <div class="settings-card">
+                <h2 style="margin: 0 0 20px 0; color: #202223;">Webhooks & Integration</h2>
+                
+                <div class="settings-group">
+                    <label>Webhook URL (Optional)</label>
+                    <input type="url" placeholder="https://your-domain.com/webhook" value="">
+                    <p style="color: #637381; font-size: 13px; margin-top: 8px;">
+                        Receive notifications when enrichment completes
+                    </p>
+                </div>
+
+                <button class="button button-secondary" style="width: auto;">
+                    Test Webhook
+                </button>
+            </div>
+        </div>
+
+        <!-- Agents Page (Original) -->
+        <div id="agents" class="page"
+            <h2>Available Agents</h2>
         <div class="agents-grid">
             <!-- Hazmat Agent -->
             <div class="agent-card">
@@ -359,6 +868,7 @@
             </div>
         </div>
 
+        <!-- Help Section (Shared across all pages) -->
         <div style="background: white; padding: 24px; border-radius: 8px; margin-top: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
             <h3>Need Help?</h3>
             <p style="color: #637381; margin-bottom: 16px;">
@@ -370,5 +880,98 @@
             </p>
         </div>
     </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Activate corresponding nav item
+            event.target.classList.add('active');
+        }
+
+        // Settings - Run Mode Selection
+        function selectRunMode(mode) {
+            // Update radio selection
+            document.querySelectorAll('.radio-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Show/hide mode options
+            if (mode === 'manual') {
+                document.getElementById('manualOptions').style.display = 'block';
+                document.getElementById('scheduledOptions').style.display = 'none';
+            } else {
+                document.getElementById('manualOptions').style.display = 'none';
+                document.getElementById('scheduledOptions').style.display = 'block';
+            }
+        }
+
+        // Run Now Button
+        function runNow() {
+            if (confirm('This will run all active agents on your entire catalog. Continue?')) {
+                alert('✅ Enrichment started! Check Analytics to track progress.');
+                // In real app: API call to trigger enrichment
+            }
+        }
+
+        // Save Schedule
+        function saveSchedule() {
+            alert('✅ Schedule saved successfully!');
+            // In real app: API call to save schedule settings
+        }
+
+        // Update Schedule Preview
+        function updateSchedulePreview() {
+            const frequency = document.getElementById('scheduleFrequency').value;
+            const time = document.getElementById('scheduleTime').value;
+            const autoNew = document.getElementById('autoEnrichNew').checked;
+            const autoChanged = document.getElementById('autoUpdateChanged').checked;
+            
+            let preview = [];
+            
+            // Frequency text
+            switch(frequency) {
+                case 'hourly':
+                    preview.push('Runs every hour');
+                    break;
+                case 'daily':
+                    preview.push(`Runs daily at ${time}`);
+                    break;
+                case 'weekly':
+                    preview.push(`Runs weekly on Mondays at ${time}`);
+                    break;
+                case 'monthly':
+                    preview.push(`Runs monthly on the 1st at ${time}`);
+                    break;
+            }
+            
+            if (autoNew) preview.push('Automatically processes new products');
+            if (autoChanged) preview.push('Re-processes changed products');
+            preview.push('Next run: Tomorrow at ' + time);
+            
+            document.getElementById('schedulePreviewList').innerHTML = 
+                preview.map(item => `<li>${item}</li>`).join('');
+        }
+
+        // Chart Period Selection
+        function setChartPeriod(period, btn) {
+            document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // In real app: Reload chart data for selected period
+        }
+    </script>
 </body>
 </html>
