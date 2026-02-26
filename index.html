@@ -656,235 +656,72 @@
         <!-- Agents Page -->
         <div id="agents" class="page">
             <!-- Data Quality Category -->
-            <div style="margin-bottom: 32px;">
-                <h2 style="color: #202223; margin-bottom: 8px;">📊 Data Quality</h2>
-                <p style="color: #637381; margin-bottom: 20px;">Extract, classify, and enrich your product data</p>
-                <div class="agents-grid">
-                    <!-- Extraction Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">📋</div>
-                            <div>
-                                <div class="agent-name">Extraction Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Extract structured attributes (material, size, color) from product data
-                        </div>
-                        <div class="agent-price">$0.03 / product • Est: $6.72/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
-
-                    <!-- Bundle Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">📦</div>
-                            <div>
-                                <div class="agent-name">Bundle Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Detect multi-item bundles and product sets for accurate pricing
-                        </div>
-                        <div class="agent-price">$0.01 / product • Est: $2.24/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
-
-                    <!-- Taxonomy Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">🏷️</div>
-                            <div>
-                                <div class="agent-name">Taxonomy Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Classify products into 6000+ Google Product Taxonomy categories
-                        </div>
-                        <div class="agent-price">$0.02 / product • Est: $4.48/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
-
-                    <!-- Schema Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">🗂️</div>
-                            <div>
-                                <div class="agent-name">Schema Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Generate structured data (Schema.org) for rich snippets and SEO
-                        </div>
-                        <div class="agent-price">$0.02 / product • Est: $4.48/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
-
-                    <!-- Enrichment Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">🌐</div>
-                            <div>
-                                <div class="agent-name">Enrichment Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Add missing product data from manufacturer sites and external sources
-                        </div>
-                        <div class="agent-price">$0.04 / product • Est: $8.96/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
+            <div class="settings-card" style="background: linear-gradient(135deg, #f4f6f8 0%, #e8eef3 100%); border-left: 4px solid #008060;">
+                <h2 style="color: #202223; margin: 0 0 8px 0; display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 32px;">📊</span>
+                    Data Quality
+                </h2>
+                <p style="color: #637381; margin: 0 0 16px 0; font-size: 15px;">
+                    Extract, classify, and enrich your product data
+                </p>
+                <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
+                    <div style="font-weight: 600; color: #202223; margin-bottom: 8px;">5 Agents Included:</div>
+                    <ul style="margin: 0; padding-left: 20px; color: #637381;">
+                        <li>Extraction Agent - Extract structured attributes</li>
+                        <li>Bundle Agent - Detect multi-item bundles</li>
+                        <li>Taxonomy Agent - Classify into 6000+ categories</li>
+                        <li>Schema Agent - Generate Schema.org markup</li>
+                        <li>Enrichment Agent - Add missing product data</li>
+                    </ul>
                 </div>
+                <button class="button" style="width: auto;" onclick="alert('Contact support@catalogagents.com to enable this category')">
+                    Activate All Data Quality Agents
+                </button>
             </div>
 
             <!-- Content & SEO Category -->
-            <div style="margin-bottom: 32px;">
-                <h2 style="color: #202223; margin-bottom: 8px;">✍️ Content & SEO</h2>
-                <p style="color: #637381; margin-bottom: 20px;">Generate optimized content and improve search rankings</p>
-                <div class="agents-grid">
-                    <!-- Content Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">✍️</div>
-                            <div>
-                                <div class="agent-name">Content Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Generate optimized product titles and descriptions for better conversions
-                        </div>
-                        <div class="agent-price">$0.05 / product • Est: $11.20/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
-
-                    <!-- SEO Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">🔍</div>
-                            <div>
-                                <div class="agent-name">SEO Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Generate SEO metadata (meta title, meta description, keywords)
-                        </div>
-                        <div class="agent-price">$0.02 / product • Est: $4.48/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
-
-                    <!-- FAQ Generator Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">❓</div>
-                            <div>
-                                <div class="agent-name">FAQ Generator</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Generate frequently asked questions and answers for your products
-                        </div>
-                        <div class="agent-price">$0.02 / product • Est: $4.48/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
+            <div class="settings-card" style="background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%); border-left: 4px solid #ffc453;">
+                <h2 style="color: #202223; margin: 0 0 8px 0; display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 32px;">✍️</span>
+                    Content & SEO
+                </h2>
+                <p style="color: #637381; margin: 0 0 16px 0; font-size: 15px;">
+                    Generate optimized content and improve search rankings
+                </p>
+                <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
+                    <div style="font-weight: 600; color: #202223; margin-bottom: 8px;">3 Agents Included:</div>
+                    <ul style="margin: 0; padding-left: 20px; color: #637381;">
+                        <li>Content Agent - Generate product titles and descriptions</li>
+                        <li>SEO Agent - Generate meta titles/descriptions</li>
+                        <li>FAQ Generator - Generate product FAQs</li>
+                    </ul>
                 </div>
+                <button class="button" style="width: auto; background: #ffc453; border-color: #ffc453;" onclick="alert('Contact support@catalogagents.com to enable this category')">
+                    Activate All Content & SEO Agents
+                </button>
             </div>
 
             <!-- Compliance Category -->
-            <div style="margin-bottom: 32px;">
-                <h2 style="color: #202223; margin-bottom: 8px;">📜 Compliance</h2>
-                <p style="color: #637381; margin-bottom: 20px;">Ensure regulatory compliance and safety requirements</p>
-                <div class="agents-grid">
-                    <!-- Hazmat Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">⚠️</div>
-                            <div>
-                                <div class="agent-name">Hazmat Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Detect hazardous materials and shipping restrictions for compliance
-                        </div>
-                        <div class="agent-price">$0.01 / product • Est: $2.24/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
-
-                    <!-- Compliance Agent -->
-                    <div class="agent-card">
-                        <div class="agent-header">
-                            <div class="agent-icon">📜</div>
-                            <div>
-                                <div class="agent-name">Compliance Agent</div>
-                                <span class="badge badge-inactive">Inactive</span>
-                            </div>
-                        </div>
-                        <div class="agent-description">
-                            Map products to tax codes (Avalara) and regulatory compliance requirements
-                        </div>
-                        <div class="agent-price">$0.02 / product • Est: $4.48/mo</div>
-                        <button class="button" onclick="alert('Contact support@catalogagents.com to enable this agent')">
-                            Activate Agent
-                        </button>
-                        <button class="button button-secondary" onclick="alert('Trial mode coming soon!')">
-                            Try on 10 Products
-                        </button>
-                    </div>
+            <div class="settings-card" style="background: linear-gradient(135deg, #ffe8e6 0%, #ffd6d1 100%); border-left: 4px solid #d82c0d;">
+                <h2 style="color: #202223; margin: 0 0 8px 0; display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 32px;">📜</span>
+                    Compliance
+                </h2>
+                <p style="color: #637381; margin: 0 0 16px 0; font-size: 15px;">
+                    Ensure regulatory compliance and safety requirements
+                </p>
+                <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
+                    <div style="font-weight: 600; color: #202223; margin-bottom: 8px;">2 Agents Included:</div>
+                    <ul style="margin: 0; padding-left: 20px; color: #637381;">
+                        <li>Hazmat Agent - Detect hazardous materials</li>
+                        <li>Compliance Agent - Tax codes and regulations</li>
+                    </ul>
                 </div>
+                <button class="button" style="width: auto; background: #d82c0d; border-color: #d82c0d;" onclick="alert('Contact support@catalogagents.com to enable this category')">
+                    Activate All Compliance Agents
+                </button>
             </div>
+        </div>
         </div>
 
         <!-- Help Section (Shared across all pages) -->
