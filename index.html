@@ -665,17 +665,32 @@
                     Extract, classify, and enrich your product data
                 </p>
                 <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
-                    <div style="font-weight: 600; color: #202223; margin-bottom: 8px;">5 Agents Included:</div>
-                    <ul style="margin: 0; padding-left: 20px; color: #637381;">
-                        <li>Extraction Agent - Extract structured attributes</li>
-                        <li>Bundle Agent - Detect multi-item bundles</li>
-                        <li>Taxonomy Agent - Classify into 6000+ categories</li>
-                        <li>Schema Agent - Generate Schema.org markup</li>
-                        <li>Enrichment Agent - Add missing product data</li>
-                    </ul>
+                    <div style="font-weight: 600; color: #202223; margin-bottom: 12px;">Select Agents:</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">📋 Extraction Agent - Extract structured attributes</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">📦 Bundle Agent - Detect multi-item bundles</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">🏷️ Taxonomy Agent - Classify into 6000+ categories</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">🗂️ Schema Agent - Generate Schema.org markup</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">🌐 Enrichment Agent - Add missing product data</span>
+                        </label>
+                    </div>
                 </div>
-                <button class="button" style="width: auto;" onclick="alert('Contact support@catalogagents.com to enable this category')">
-                    Activate All Data Quality Agents
+                <button class="button" style="width: auto;" onclick="alert('Selected agents will be activated')">
+                    Activate Selected Agents
                 </button>
             </div>
 
@@ -689,15 +704,24 @@
                     Generate optimized content and improve search rankings
                 </p>
                 <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
-                    <div style="font-weight: 600; color: #202223; margin-bottom: 8px;">3 Agents Included:</div>
-                    <ul style="margin: 0; padding-left: 20px; color: #637381;">
-                        <li>Content Agent - Generate product titles and descriptions</li>
-                        <li>SEO Agent - Generate meta titles/descriptions</li>
-                        <li>FAQ Generator - Generate product FAQs</li>
-                    </ul>
+                    <div style="font-weight: 600; color: #202223; margin-bottom: 12px;">Select Agents:</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">✍️ Content Agent - Generate product titles and descriptions</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">🔍 SEO Agent - Generate meta titles/descriptions</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">❓ FAQ Generator - Generate product FAQs</span>
+                        </label>
+                    </div>
                 </div>
-                <button class="button" style="width: auto; background: #ffc453; border-color: #ffc453;" onclick="alert('Contact support@catalogagents.com to enable this category')">
-                    Activate All Content & SEO Agents
+                <button class="button" style="width: auto; background: #ffc453; border-color: #ffc453;" onclick="alert('Selected agents will be activated')">
+                    Activate Selected Agents
                 </button>
             </div>
 
@@ -711,14 +735,20 @@
                     Ensure regulatory compliance and safety requirements
                 </p>
                 <div style="background: white; padding: 16px; border-radius: 6px; margin-bottom: 12px;">
-                    <div style="font-weight: 600; color: #202223; margin-bottom: 8px;">2 Agents Included:</div>
-                    <ul style="margin: 0; padding-left: 20px; color: #637381;">
-                        <li>Hazmat Agent - Detect hazardous materials</li>
-                        <li>Compliance Agent - Tax codes and regulations</li>
-                    </ul>
+                    <div style="font-weight: 600; color: #202223; margin-bottom: 12px;">Select Agents:</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">⚠️ Hazmat Agent - Detect hazardous materials</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f4f6f8'" onmouseout="this.style.background='white'">
+                            <input type="checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="color: #202223;">📜 Compliance Agent - Tax codes and regulations</span>
+                        </label>
+                    </div>
                 </div>
-                <button class="button" style="width: auto; background: #d82c0d; border-color: #d82c0d;" onclick="alert('Contact support@catalogagents.com to enable this category')">
-                    Activate All Compliance Agents
+                <button class="button" style="width: auto; background: #d82c0d; border-color: #d82c0d;" onclick="alert('Selected agents will be activated')">
+                    Activate Selected Agents
                 </button>
             </div>
         </div>
