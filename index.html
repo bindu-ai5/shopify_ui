@@ -549,7 +549,7 @@
                 <!-- Manual Mode Options -->
                 <div id="manualOptions" class="settings-group">
                     <h3>Manual Trigger</h3>
-                    <button class="button" style="width: auto;" onclick="runNow()">
+                    <button class="button" style="width: auto;" onclick="runEnrichment()">
                         ▶️ Run All Active Agents Now
                     </button>
                     <p style="color: #637381; font-size: 13px; margin-top: 8px;">
@@ -857,6 +857,130 @@
             btn.classList.add('active');
             // In real app: Reload chart data for selected period
         }
+
+        // ========================================
+        // BACKEND INTEGRATION
+        // ========================================
+        
+        // Initialize Catalog API
+        const catalogAPI = new CatalogAgentAPI();
+        
+        // Get Shopify credentials from OAuth (passed by Shopify when app is embedded)
+        function getShopifyCredentials() {
+            // In production, these come from URL parameters or Shopify App Bridge
+            const urlParams = new URLSearchParams(window.location.search);
+            const shop = urlParams.get('shop') || sessionStorage.getItem('shopify_shop');
+            const token = sessionStorage.getItem('shopify_token');
+            
+            return { shop, token };
+        }
+        
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', async () => {
+            const { shop, token } = getShopifyCredentials();
+            
+            if (shop && token) {
+                catalogAPI.setShopifyCredentials(shop, token);
+                await loadDashboardStats();
+            }
+        });
+        
+        // Load real statistics
+        async function loadDashboardStats() {
+            try {
+                const products = await catalogAPI.getShopifyProducts(250);
+                document.querySelector('.stat-card .number').textContent = products.length;
+                
+                // Count enriched products (with sanio metafields)
+                // This is simplified - in production you'd call a backend endpoint
+                console.log(`Loaded ${products.length} products from Shopify`);
+            } catch (error) {
+                console.error('Failed to load stats:', error);
+            }
+        }
+        
+        // Run enrichment workflow
+        async function runEnrichment() {
+            const runButton = document.querySelector('button[onclick*="runEnrichment"]');
+            if (!runButton) return;
+            
+            runButton.disabled = true;
+            runButton.textContent = '⏳ Processing...';
+            
+            try {
+                // Show progress dialog
+                showProgressDialog();
+                
+                // Run the full workflow
+                await catalogAPI.enrichAndWriteback((progress) => {
+                    updateProgressDialog(progress);
+                });
+                
+                // Success
+                alert('✅ Enrichment completed! Your products have been updated.');
+                await loadDashboardStats();
+                
+            } catch (error) {
+                alert(`❌ Enrichment failed: ${error.message}`);
+                console.error('Enrichment error:', error);
+            } finally {
+                runButton.disabled = false;
+                runButton.textContent = '▶️ Run All Active Agents Now';
+                hideProgressDialog();
+            }
+        }
+        
+        // Progress dialog functions
+        function showProgressDialog() {
+            // Create progress overlay
+            const overlay = document.createElement('div');
+            overlay.id = 'progressOverlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            `;
+            
+            overlay.innerHTML = `
+                <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; width: 90%;">
+                    <h2 style="margin: 0 0 20px 0;">🚀 Enriching Your Catalog</h2>
+                    <div id="progressLog" style="background: #f6f6f7; padding: 20px; border-radius: 8px; max-height: 300px; overflow-y: auto;">
+                        <div style="color: #637381;">Starting enrichment...</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+        }
+        
+        function updateProgressDialog(progress) {
+            const log = document.getElementById('progressLog');
+            if (!log) return;
+            
+            const entry = document.createElement('div');
+            entry.style.cssText = 'padding: 8px; margin: 4px 0; border-left: 3px solid #008060; background: white;';
+            entry.textContent = `[${progress.step}] ${progress.message}`;
+            
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function hideProgressDialog() {
+            const overlay = document.getElementById('progressOverlay');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
     </script>
+    
+    <!-- Include Catalog API -->
+    <script src="catalog-api.js"></script>
 </body>
 </html>
