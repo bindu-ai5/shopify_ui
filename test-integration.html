@@ -74,6 +74,19 @@
     <h1>🚀 Catalog AI Direct - Integration Test</h1>
     <p>Test the connection between Shopify and Catalog Agent API</p>
     
+    <div class="settings-card" style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+        <h3>Shopify Credentials</h3>
+        <div style="margin: 10px 0;">
+            <label>Store URL:</label>
+            <input type="text" id="shopifyStore" placeholder="your-store.myshopify.com" style="width: 100%; padding: 8px; margin-top: 5px;">
+        </div>
+        <div style="margin: 10px 0;">
+            <label>Access Token:</label>
+            <input type="password" id="shopifyToken" placeholder="shpat_..." style="width: 100%; padding: 8px; margin-top: 5px;">
+        </div>
+        <button class="button" onclick="setCredentials()">Save Credentials</button>
+    </div>
+    
     <div class="stats">
         <div class="stat-card">
             <div class="number" id="productsCount">-</div>
@@ -104,6 +117,19 @@
     <script>
         let fetchedProducts = [];
         let enrichedResults = null;
+        
+        function setCredentials() {
+            const store = document.getElementById('shopifyStore').value;
+            const token = document.getElementById('shopifyToken').value;
+            
+            if (!store || !token) {
+                log('❌ Please enter both store URL and access token', true);
+                return;
+            }
+            
+            catalogAPI.setShopifyCredentials(store, token);
+            log('✅ Credentials saved!');
+        }
         
         function log(message, isError = false) {
             const logDiv = document.getElementById('log');
