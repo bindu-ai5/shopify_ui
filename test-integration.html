@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog AI - Test Integration</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .button {
+            background: #008060;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background: #006e52;
+        }
+        .button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .log {
+            background: #f6f6f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            padding: 8px;
+            margin: 4px 0;
+            border-left: 3px solid #008060;
+            background: white;
+        }
+        .log-entry.error {
+            border-left-color: #d82c0d;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 600;
+            color: #008060;
+        }
+        .stat-card .label {
+            color: #637381;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Catalog AI Direct - Integration Test</h1>
+    <p>Test the connection between Shopify and Catalog Agent API</p>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="number" id="productsCount">-</div>
+            <div class="label">Products Fetched</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" id="enrichedCount">-</div>
+            <div class="label">Products Enriched</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" id="writtenCount">-</div>
+            <div class="label">Written to Shopify</div>
+        </div>
+    </div>
+    
+    <div>
+        <button class="button" onclick="testFetchProducts()">1. Fetch Products from Shopify</button>
+        <button class="button" onclick="testEnrichProducts()" id="enrichBtn" disabled>2. Enrich Products</button>
+        <button class="button" onclick="testWriteback()" id="writebackBtn" disabled>3. Write Back to Shopify</button>
+        <button class="button" onclick="testFullWorkflow()">▶ Run Full Workflow</button>
+    </div>
+    
+    <div class="log" id="log">
+        <div style="color: #637381;">Logs will appear here...</div>
+    </div>
+    
+    <script src="catalog-api.js"></script>
+    <script>
+        let fetchedProducts = [];
+        let enrichedResults = null;
+        
+        function log(message, isError = false) {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry' + (isError ? ' error' : '');
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        async function testFetchProducts() {
+            try {
+                log('Fetching products from Shopify...');
+                fetchedProducts = await catalogAPI.getShopifyProducts(10);
+                log(`✅ Fetched ${fetchedProducts.length} products`);
+                
+                document.getElementById('productsCount').textContent = fetchedProducts.length;
+                document.getElementById('enrichBtn').disabled = false;
+                
+                log(`Sample product: ${fetchedProducts[0].title}`);
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, true);
+            }
+        }
+        
+        async function testEnrichProducts() {
+            try {
+                log('Sending products to Catalog Agent for enrichment...');
+                const job = await catalogAPI.enrichProducts(fetchedProducts);
+                log(`✅ Job started: ${job.job_id}`);
+                
+                // Monitor progress
+                log('Monitoring progress...');
+                catalogAPI.streamProgress(job.job_id, (progress) => {
+                    log(`Progress: ${progress.status} - ${JSON.stringify(progress)}`);
+                    
+                    if (progress.status === 'completed') {
+                        log('✅ Enrichment completed!');
+                        document.getElementById('writebackBtn').disabled = false;
+                    }
+                });
+                
+                // Wait and get results
+                setTimeout(async () => {
+                    try {
+                        enrichedResults = await catalogAPI.getResults(job.job_id, 'products');
+                        const count = enrichedResults.items?.length || 0;
+                        log(`✅ Got ${count} enriched products`);
+                        document.getElementById('enrichedCount').textContent = count;
+                    } catch (err) {
+                        log(`❌ Error getting results: ${err.message}`, true);
+                    }
+                }, 10000); // Wait 10 seconds
+                
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, true);
+            }
+        }
+        
+        async function testWriteback() {
+            try {
+                if (!enrichedResults || !enrichedResults.items) {
+                    log('❌ No enriched results to write back', true);
+                    return;
+                }
+                
+                log('Writing enriched data back to Shopify...');
+                const results = await catalogAPI.writebackToShopify(enrichedResults.items);
+                log(`✅ Writeback complete! Success: ${results.success}, Failed: ${results.failed}`);
+                document.getElementById('writtenCount').textContent = results.success;
+                
+                if (results.errors.length > 0) {
+                    log(`Errors: ${JSON.stringify(results.errors)}`, true);
+                }
+            } catch (error) {
+                log(`❌ Error: ${error.message}`, true);
+            }
+        }
+        
+        async function testFullWorkflow() {
+            log('🚀 Starting full enrichment workflow...');
+            
+            try {
+                await catalogAPI.enrichAndWriteback((progress) => {
+                    log(`[${progress.step}] ${progress.message}`);
+                    
+                    if (progress.data) {
+                        if (progress.data.success !== undefined) {
+                            document.getElementById('writtenCount').textContent = progress.data.success;
+                        }
+                    }
+                });
+                
+                log('✅ Full workflow completed!');
+            } catch (error) {
+                log(`❌ Workflow failed: ${error.message}`, true);
+            }
+        }
+        
+        // Initial log
+        log('Ready! Click buttons to test the integration.');
+    </script>
+</body>
+</html>
