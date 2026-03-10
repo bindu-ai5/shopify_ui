@@ -906,6 +906,23 @@
         
         // Run enrichment workflow
         async function runEnrichment() {
+            // Check if credentials are set
+            if (!catalogAPI.shopifyStore || !catalogAPI.shopifyToken) {
+                // Prompt for credentials
+                const store = prompt('Enter your Shopify store URL (e.g., yourstore.myshopify.com):');
+                const token = prompt('Enter your Shopify access token (starts with shpat_):');
+                
+                if (!store || !token) {
+                    alert('❌ Credentials required to run enrichment');
+                    return;
+                }
+                
+                catalogAPI.setShopifyCredentials(store, token);
+                // Save to session storage
+                sessionStorage.setItem('shopify_shop', store);
+                sessionStorage.setItem('shopify_token', token);
+            }
+            
             const runButton = document.querySelector('button[onclick*="runEnrichment"]');
             if (!runButton) return;
             
