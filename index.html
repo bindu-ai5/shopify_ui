@@ -328,15 +328,202 @@
             color: #637381;
             font-size: 14px;
         }
+        .pricing-intro {
+            color: #637381;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .pricing-card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 2px solid #e1e3e5;
+            display: flex;
+            flex-direction: column;
+        }
+        .pricing-card.featured {
+            border-color: #008060;
+            box-shadow: 0 4px 12px rgba(0, 128, 96, 0.15);
+        }
+        .pricing-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            color: #202223;
+        }
+        .pricing-card .price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #008060;
+            margin: 8px 0 12px 0;
+        }
+        .pricing-card .price small {
+            font-size: 14px;
+            font-weight: 500;
+            color: #637381;
+        }
+        .pricing-card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #637381;
+            font-size: 14px;
+            line-height: 1.6;
+            flex: 1;
+        }
+        .pricing-badge {
+            display: inline-block;
+            background: #d4f5e9;
+            color: #008060;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .pricing-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #637381;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 32px 0 16px 0;
+        }
+        .pricing-cta {
+            margin-top: auto;
+            padding-top: 20px;
+        }
+        .pricing-cta .button {
+            margin-bottom: 0;
+        }
+        .pricing-cta .button-link {
+            background: transparent;
+            color: #008060;
+            border: none;
+            text-decoration: underline;
+            font-size: 13px;
+            padding: 8px 0;
+            width: 100%;
+            cursor: pointer;
+        }
+        .pricing-cta .button-link:hover {
+            color: #006e52;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .modal-overlay.open {
+            display: flex;
+        }
+        .modal-dialog {
+            background: white;
+            border-radius: 12px;
+            max-width: 440px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .modal-dialog h2 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+            color: #202223;
+        }
+        .modal-dialog .modal-lead {
+            color: #637381;
+            font-size: 14px;
+            margin: 0 0 20px 0;
+            line-height: 1.5;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            border: none;
+            background: #f6f6f7;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            color: #637381;
+        }
+        .modal-close:hover {
+            background: #e1e3e5;
+        }
+        .modal-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #202223;
+            margin-bottom: 6px;
+        }
+        .modal-form input[type="text"],
+        .modal-form input[type="email"],
+        .modal-form input[type="tel"],
+        .modal-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #c4cdd5;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        .modal-form textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .modal-form .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #202223;
+            line-height: 1.45;
+        }
+        .modal-form .checkbox-row input {
+            margin-top: 3px;
+            width: auto;
+        }
+        .modal-plan-pill {
+            background: #f4f6f8;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #202223;
+            margin-bottom: 20px;
+            border-left: 4px solid #008060;
+        }
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <div class="nav-bar">
-        <div class="nav-item active" onclick="showPage('dashboard')">Dashboard</div>
-        <div class="nav-item" onclick="showPage('analytics')">Analytics</div>
-        <div class="nav-item" onclick="showPage('settings')">Settings</div>
-        <div class="nav-item" onclick="showPage('agents')">Agents</div>
+        <div class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</div>
+        <div class="nav-item" data-page="analytics" onclick="showPage('analytics')">Analytics</div>
+        <div class="nav-item" data-page="settings" onclick="showPage('settings')">Settings</div>
+        <div class="nav-item" data-page="agents" onclick="showPage('agents')">Agents</div>
+        <div class="nav-item" data-page="pricing" onclick="showPage('pricing')">Pricing</div>
     </div>
     <div class="container">
         <!-- Dashboard Page -->
@@ -370,7 +557,119 @@
                     <button class="button" onclick="showPage('agents')">Activate Agents</button>
                     <button class="button button-secondary" onclick="showPage('analytics')">View Analytics</button>
                     <button class="button button-secondary" onclick="showPage('settings')">Configure Settings</button>
+                    <button class="button button-secondary" onclick="showPage('pricing')">View Pricing</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Pricing Page -->
+        <div id="pricing" class="page">
+            <div class="header">
+                <h1>💳 Pricing</h1>
+                <p>Simple plans by catalog size and which agents you need</p>
+            </div>
+
+            <p class="pricing-intro">
+                All paid plans include <strong>up to 5,000 SKUs</strong>. Choose enrichment only, add compliance or content, or get everything together at the best value.
+            </p>
+
+            <div class="pricing-section-title">Free tier</div>
+            <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 420px;">
+                <div class="pricing-card">
+                    <span class="pricing-badge">Get started</span>
+                    <h3>Starter</h3>
+                    <div class="price">$0 <small>/ month</small></div>
+                    <ul>
+                        <li>Up to <strong>25 SKUs</strong> free</li>
+                        <li>Try catalog enrichment on a small set</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button type="button" class="button" onclick="pricingStartFree()">Get started free</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-section-title">Paid — up to 5,000 SKUs</div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Enrichment only</h3>
+                    <div class="price">$100 <small>/ month</small></div>
+                    <ul>
+                        <li>Up to 5,000 SKUs</li>
+                        <li>Core enrichment (taxonomy, attributes, SEO data, etc.)</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button type="button" class="button" onclick="openPricingCheckout('enrichment_100')">Subscribe — $100/mo</button>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enrichment + Compliance</h3>
+                    <div class="price">$150 <small>/ month</small></div>
+                    <ul>
+                        <li>Up to 5,000 SKUs</li>
+                        <li>Everything in enrichment</li>
+                        <li>Plus compliance (e.g. tax codes, regulatory)</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button type="button" class="button" onclick="openPricingCheckout('compliance_150')">Subscribe — $150/mo</button>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enrichment + Content</h3>
+                    <div class="price">$150 <small>/ month</small></div>
+                    <ul>
+                        <li>Up to 5,000 SKUs</li>
+                        <li>Everything in enrichment</li>
+                        <li>Plus content (titles, descriptions, FAQs)</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button type="button" class="button" onclick="openPricingCheckout('content_150')">Subscribe — $150/mo</button>
+                    </div>
+                </div>
+                <div class="pricing-card featured">
+                    <span class="pricing-badge">Best value</span>
+                    <h3>All three</h3>
+                    <div class="price">$200 <small>/ month</small></div>
+                    <ul>
+                        <li>Up to 5,000 SKUs</li>
+                        <li>Enrichment + compliance + content</li>
+                        <li>Full catalog AI stack in one plan</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <button type="button" class="button" onclick="openPricingCheckout('all_three_200')">Subscribe — $200/mo</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card" style="margin-top: 8px;">
+                <p style="color: #637381; font-size: 14px; margin: 0;">
+                    Need more SKUs or a custom bundle? <a href="#" onclick="openPricingContact('enterprise'); return false;">Contact sales</a> — we’ll align billing with your Shopify app subscription when you go live.
+                </p>
+                <p style="color: #637381; font-size: 12px; margin: 12px 0 0 0;">
+                    Subscribe sends a request for approval (no payment on this page). Payment and formal contract can follow after we confirm your plan.
+                </p>
+            </div>
+        </div>
+
+        <!-- Subscription / contact form modal (approval request — no payment gateway) -->
+        <div id="subscribeModalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="subscribeModalTitle">
+            <div class="modal-dialog">
+                <button type="button" class="modal-close" onclick="closeSubscribeModal()" aria-label="Close">&times;</button>
+                <h2 id="subscribeModalTitle">Subscription request</h2>
+                <p class="modal-lead">Tell us who you are. We’ll review your plan and follow up with approval and next steps (including contract where applicable). No payment is collected here.</p>
+                <div id="subscribePlanPill" class="modal-plan-pill"></div>
+                <form id="subscribeForm" class="modal-form" onsubmit="submitSubscribeForm(event)">
+                    <input type="hidden" id="subscribePlanKey" name="plan_key" value="">
+                    <label for="subscribeName">Full name</label>
+                    <input type="text" id="subscribeName" name="name" required autocomplete="name" placeholder="Jane Merchant">
+                    <label for="subscribeEmail">Email</label>
+                    <input type="email" id="subscribeEmail" name="email" required autocomplete="email" placeholder="you@store.com">
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="subscribeAgree" name="agree_terms" required>
+                        <label for="subscribeAgree" style="font-weight: 400; margin: 0;">I have read and agree to proceed under the applicable subscription terms and contract process for approval. I understand payment and final agreement will be handled in a separate step after approval.</label>
+                    </div>
+                    <button type="submit" class="button">Submit for approval</button>
+                </form>
             </div>
         </div>
 
@@ -635,6 +934,36 @@
                 </div>
             </div>
 
+            <!-- API Backend (for Run Now) -->
+            <div class="settings-card">
+                <h2 style="margin: 0 0 20px 0; color: #202223;">API Backend</h2>
+                <p style="color: #637381; font-size: 14px; margin-bottom: 16px;">
+                    Flask proxy (<code>api_server.py</code>) — points to Paladio catalog at <a href="http://13.218.58.17/docs" target="_blank" rel="noopener">13.218.58.17</a> for enrichment. For local dev, run <code>python api_server.py</code> and use <code>http://localhost:5001</code>.
+                    <strong style="display: block; margin-top: 8px;">Shopify access tokens stay on this server only</strong>
+                    <span style="display: block; margin-top: 4px;">This page never asks for or stores <code>shpat_</code> tokens; configure them in the server environment.</span>
+                </p>
+                <div class="settings-group">
+                    <label>Backend URL</label>
+                    <input type="url" id="backendUrl" placeholder="http://13.218.58.17" value="http://13.218.58.17">
+                    <p style="color: #637381; font-size: 13px; margin-top: 8px;">
+                        Production: <code>http://13.218.58.17</code> — Local: <code>http://localhost:5001</code>
+                    </p>
+                </div>
+                <button class="button button-secondary" style="width: auto;" onclick="saveBackendUrl()">
+                    Save Backend URL
+                </button>
+                <button class="button button-secondary" style="width: auto; margin-left: 8px;" onclick="testBackend()">
+                    Test Connection
+                </button>
+                <p style="margin-top: 12px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="demoMode" style="width: auto;">
+                        <span>Demo mode</span> — Use existing enriched data (no catalog API key needed)
+                    </label>
+                </p>
+                <p id="backendTestResult" style="margin-top: 8px; font-size: 13px;"></p>
+            </div>
+
             <!-- Webhook Settings -->
             <div class="settings-card">
                 <h2 style="margin: 0 0 20px 0; color: #202223;">Webhooks & Integration</h2>
@@ -769,21 +1098,88 @@
     <script>
         // Page Navigation
         function showPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            
-            // Remove active class from all nav items
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Activate corresponding nav item
-            event.target.classList.add('active');
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) targetPage.classList.add('active');
+            const navItem = document.querySelector('.nav-item[data-page="' + pageId + '"]');
+            if (navItem) navItem.classList.add('active');
+        }
+
+        const PRICING_LABELS = {
+            enrichment_100: 'Enrichment only — $100/mo (up to 5,000 SKUs)',
+            compliance_150: 'Enrichment + Compliance — $150/mo',
+            content_150: 'Enrichment + Content — $150/mo',
+            all_three_200: 'All three — $200/mo',
+            enterprise: 'Enterprise / custom SKUs'
+        };
+
+        const SUBSCRIBE_MAIL = 'support@catalogagents.com';
+
+        function openPricingCheckout(planKey) {
+            openSubscribeModal(planKey);
+        }
+
+        function openPricingContact(kind) {
+            openSubscribeModal(kind);
+        }
+
+        function openSubscribeModal(planKey) {
+            const label = PRICING_LABELS[planKey] || planKey;
+            document.getElementById('subscribeForm').reset();
+            document.getElementById('subscribePlanKey').value = planKey;
+            document.getElementById('subscribePlanPill').textContent = 'Selected plan: ' + label;
+            document.getElementById('subscribeModalOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSubscribeModal() {
+            document.getElementById('subscribeModalOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function submitSubscribeForm(e) {
+            e.preventDefault();
+            const planKey = document.getElementById('subscribePlanKey').value;
+            const planLabel = PRICING_LABELS[planKey] || planKey;
+            const name = document.getElementById('subscribeName').value.trim();
+            const email = document.getElementById('subscribeEmail').value.trim();
+            if (!document.getElementById('subscribeAgree').checked) {
+                alert('Please confirm you agree to the terms and contract process.');
+                return;
+            }
+            const body =
+                'Subscription approval request\r\n' +
+                '---\r\n' +
+                'Plan: ' + planLabel + '\r\n' +
+                'Name: ' + name + '\r\n' +
+                'Email: ' + email + '\r\n' +
+                '\r\n' +
+                'Agreement: I agree to proceed under the subscription terms and contract process for approval. Payment will follow a separate step after approval.\r\n';
+            const subject = 'Subscription approval request — ' + planLabel;
+            const mailtoUrl = 'mailto:' + SUBSCRIBE_MAIL +
+                '?subject=' + encodeURIComponent(subject) +
+                '&body=' + encodeURIComponent(body);
+            window.location.href = mailtoUrl;
+            closeSubscribeModal();
+            setTimeout(function () {
+                alert('Your email app should open with the request pre-filled. If nothing opens, email ' + SUBSCRIBE_MAIL + ' with the same details.');
+            }, 300);
+        }
+
+        document.getElementById('subscribeModalOverlay').addEventListener('click', function (ev) {
+            if (ev.target === this) closeSubscribeModal();
+        });
+        document.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Escape') closeSubscribeModal();
+        });
+
+        function pricingStartFree() {
+            showPage('settings');
         }
 
         // Settings - Run Mode Selection
@@ -867,60 +1263,111 @@
         // BACKEND INTEGRATION
         // ========================================
         
-        // Initialize Catalog API
-        const catalogAPI = new CatalogAgentAPI();
+        // catalogAPI is already initialized in catalog-api.js, no need to redeclare
         
-        // Get Shopify credentials from OAuth (passed by Shopify when app is embedded)
-        function getShopifyCredentials() {
-            // In production, these come from URL parameters or Shopify App Bridge
+        // Optional shop from ?shop= (embedded app). Admin tokens never belong in the browser.
+        function getShopFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
-            const shop = urlParams.get('shop') || sessionStorage.getItem('shopify_shop');
-            const token = sessionStorage.getItem('shopify_token');
-            
-            return { shop, token };
+            return urlParams.get('shop') || sessionStorage.getItem('shopify_shop') || null;
+        }
+
+        // Remove legacy token from older sessions (do not keep secrets in sessionStorage)
+        try {
+            sessionStorage.removeItem('shopify_token');
+        } catch (e) { /* ignore */ }
+        
+        // Save/load backend URL
+        function saveBackendUrl() {
+            const url = document.getElementById('backendUrl')?.value?.trim();
+            if (url) {
+                sessionStorage.setItem('catalog_backend_url', url);
+                catalogAPI.setBackendUrl(url);
+                document.getElementById('backendTestResult').textContent = 'Saved: ' + url;
+            } else {
+                sessionStorage.removeItem('catalog_backend_url');
+                catalogAPI.setBackendUrl(null);
+                document.getElementById('backendTestResult').textContent = 'Cleared.';
+            }
+        }
+        
+        // Test backend connection
+        async function testBackend() {
+            const url = document.getElementById('backendUrl')?.value?.trim() || catalogAPI.backendUrl;
+            const el = document.getElementById('backendTestResult');
+            if (!url) {
+                el.textContent = 'Enter a Backend URL first (e.g. http://13.218.58.17 or http://localhost:5001)';
+                el.style.color = '#d82c0d';
+                return;
+            }
+            el.textContent = 'Testing ' + url + '...';
+            el.style.color = '#637381';
+            try {
+                const resp = await fetch(url + '/api/health');
+                const data = await resp.json();
+                el.textContent = 'OK: ' + (data.message || data.status);
+                el.style.color = '#008060';
+            } catch (err) {
+                el.textContent = 'Failed: ' + err.message + '. Is api_server.py running?';
+                el.style.color = '#d82c0d';
+            }
         }
         
         // Initialize on load
         window.addEventListener('DOMContentLoaded', async () => {
-            const { shop, token } = getShopifyCredentials();
+            // Load saved backend URL; fix port 5000->5001 (macOS AirPlay uses 5000)
+            let savedBackend = sessionStorage.getItem('catalog_backend_url');
+            if (savedBackend && savedBackend.includes(':5000')) {
+                savedBackend = savedBackend.replace(':5000', ':5001');
+                sessionStorage.setItem('catalog_backend_url', savedBackend);
+            }
+            const defaultBackend = 'http://13.218.58.17';
+            if (savedBackend) {
+                catalogAPI.setBackendUrl(savedBackend);
+                const input = document.getElementById('backendUrl');
+                if (input) input.value = savedBackend;
+            } else {
+                catalogAPI.setBackendUrl(defaultBackend);
+                const input = document.getElementById('backendUrl');
+                if (input && !input.value) input.value = defaultBackend;
+            }
             
-            if (shop && token) {
-                catalogAPI.setShopifyCredentials(shop, token);
+            const shop = getShopFromUrl();
+            if (shop) {
+                catalogAPI.setShopDomain(shop);
+                sessionStorage.setItem('shopify_shop', shop);
+            }
+            if (catalogAPI.backendUrl) {
                 await loadDashboardStats();
             }
         });
         
-        // Load real statistics
+        // Load statistics via backend only (server holds Shopify token)
         async function loadDashboardStats() {
             try {
-                const products = await catalogAPI.getShopifyProducts(250);
-                document.querySelector('.stat-card .number').textContent = products.length;
-                
-                // Count enriched products (with sanio metafields)
-                // This is simplified - in production you'd call a backend endpoint
-                console.log(`Loaded ${products.length} products from Shopify`);
+                if (!catalogAPI.backendUrl) {
+                    console.warn('Set Backend URL in Settings to load dashboard stats.');
+                    return;
+                }
+                const resp = await fetch(`${catalogAPI.backendUrl.replace(/\/$/, '')}/api/stats`);
+                if (!resp.ok) {
+                    console.error('Stats:', await resp.text());
+                    return;
+                }
+                const data = await resp.json();
+                const stats = data.stats || {};
+                const el = document.querySelector('.stat-card .number');
+                if (el && stats.total_products != null) el.textContent = stats.total_products;
+                console.log('Dashboard stats from backend', stats);
             } catch (error) {
                 console.error('Failed to load stats:', error);
             }
         }
         
         // Run enrichment workflow
-        async function runEnrichment() {
-            // Check if credentials are set
-            if (!catalogAPI.shopifyStore || !catalogAPI.shopifyToken) {
-                // Prompt for credentials
-                const store = prompt('Enter your Shopify store URL (e.g., yourstore.myshopify.com):');
-                const token = prompt('Enter your Shopify access token (starts with shpat_):');
-                
-                if (!store || !token) {
-                    alert('❌ Credentials required to run enrichment');
-                    return;
-                }
-                
-                catalogAPI.setShopifyCredentials(store, token);
-                // Save to session storage
-                sessionStorage.setItem('shopify_shop', store);
-                sessionStorage.setItem('shopify_token', token);
+        window.runEnrichment = async function() {
+            if (!catalogAPI.backendUrl) {
+                alert('❌ Set your Backend URL in Settings (your api_server). Shopify tokens are kept only on the server.');
+                return;
             }
             
             const runButton = document.querySelector('button[onclick*="runEnrichment"]');
@@ -933,17 +1380,22 @@
                 // Show progress dialog
                 showProgressDialog();
                 
-                // Run the full workflow
+                // Run the full workflow (pass demo mode if checked)
+                const demoMode = document.getElementById('demoMode')?.checked || false;
                 await catalogAPI.enrichAndWriteback((progress) => {
                     updateProgressDialog(progress);
-                });
+                }, { demo: demoMode });
                 
                 // Success
                 alert('✅ Enrichment completed! Your products have been updated.');
                 await loadDashboardStats();
                 
             } catch (error) {
-                alert(`❌ Enrichment failed: ${error.message}`);
+                let msg = error.message;
+                if (msg === 'Failed to fetch') {
+                    msg = 'Cannot reach backend. Run "python3 api_server.py" in catalog-agentic-system-dependencyinjection. Then click "Test Connection" in Settings.';
+                }
+                alert(`❌ Enrichment failed: ${msg}`);
                 console.error('Enrichment error:', error);
             } finally {
                 runButton.disabled = false;
@@ -953,7 +1405,7 @@
         }
         
         // Progress dialog functions
-        function showProgressDialog() {
+        window.showProgressDialog = function() {
             // Create progress overlay
             const overlay = document.createElement('div');
             overlay.id = 'progressOverlay';
@@ -982,7 +1434,7 @@
             document.body.appendChild(overlay);
         }
         
-        function updateProgressDialog(progress) {
+        window.updateProgressDialog = function(progress) {
             const log = document.getElementById('progressLog');
             if (!log) return;
             
@@ -994,7 +1446,7 @@
             log.scrollTop = log.scrollHeight;
         }
         
-        function hideProgressDialog() {
+        window.hideProgressDialog = function() {
             const overlay = document.getElementById('progressOverlay');
             if (overlay) {
                 overlay.remove();

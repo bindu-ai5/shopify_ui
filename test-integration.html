@@ -72,19 +72,16 @@
 </head>
 <body>
     <h1>🚀 Catalog AI Direct - Integration Test</h1>
-    <p>Test the connection between Shopify and Catalog Agent API</p>
+    <p>Test the connection via <strong>api_server</strong> (Shopify tokens must not be entered in the browser).</p>
     
     <div class="settings-card" style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-        <h3>Shopify Credentials</h3>
+        <h3>Backend URL</h3>
+        <p style="color: #637381; font-size: 14px;">Set <code>SHOPIFY_STORE_URL</code> and <code>SHOPIFY_ACCESS_TOKEN</code> on the server, then paste your API base URL here.</p>
         <div style="margin: 10px 0;">
-            <label>Store URL:</label>
-            <input type="text" id="shopifyStore" placeholder="your-store.myshopify.com" style="width: 100%; padding: 8px; margin-top: 5px;">
+            <label>api_server base URL:</label>
+            <input type="url" id="backendUrl" placeholder="http://localhost:5001" value="http://localhost:5001" style="width: 100%; padding: 8px; margin-top: 5px;">
         </div>
-        <div style="margin: 10px 0;">
-            <label>Access Token:</label>
-            <input type="password" id="shopifyToken" placeholder="shpat_..." style="width: 100%; padding: 8px; margin-top: 5px;">
-        </div>
-        <button class="button" onclick="setCredentials()">Save Credentials</button>
+        <button class="button" onclick="setBackend()">Use this backend</button>
     </div>
     
     <div class="stats">
@@ -118,17 +115,14 @@
         let fetchedProducts = [];
         let enrichedResults = null;
         
-        function setCredentials() {
-            const store = document.getElementById('shopifyStore').value;
-            const token = document.getElementById('shopifyToken').value;
-            
-            if (!store || !token) {
-                log('❌ Please enter both store URL and access token', true);
+        function setBackend() {
+            const url = document.getElementById('backendUrl').value.trim();
+            if (!url) {
+                log('❌ Enter backend URL', true);
                 return;
             }
-            
-            catalogAPI.setShopifyCredentials(store, token);
-            log('✅ Credentials saved!');
+            catalogAPI.setBackendUrl(url);
+            log('✅ Backend URL set: ' + url);
         }
         
         function log(message, isError = false) {
@@ -142,7 +136,11 @@
         
         async function testFetchProducts() {
             try {
-                log('Fetching products from Shopify...');
+                if (!catalogAPI.backendUrl) {
+                    log('❌ Set backend URL first', true);
+                    return;
+                }
+                log('Fetching products via backend /api/products...');
                 fetchedProducts = await catalogAPI.getShopifyProducts(10);
                 log(`✅ Fetched ${fetchedProducts.length} products`);
                 
@@ -211,7 +209,10 @@
         
         async function testFullWorkflow() {
             log('🚀 Starting full enrichment workflow...');
-            
+            if (!catalogAPI.backendUrl) {
+                log('❌ Set backend URL first', true);
+                return;
+            }
             try {
                 await catalogAPI.enrichAndWriteback((progress) => {
                     log(`[${progress.step}] ${progress.message}`);
@@ -229,8 +230,8 @@
             }
         }
         
-        // Initial log
-        log('Ready! Click buttons to test the integration.');
+        catalogAPI.setBackendUrl(document.getElementById('backendUrl').value.trim());
+        log('Ready! Configure backend URL if needed, then test.');
     </script>
 </body>
 </html>
